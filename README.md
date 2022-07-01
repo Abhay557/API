@@ -65,6 +65,7 @@ check out [the official docs](https://github.com/acode/functionscript).
 
 https://youtu.be/Y9HIMlPMANk
 <h3>Another Example</h3>
+
 ```
 let messagePrompts = [
 'Number 1',
