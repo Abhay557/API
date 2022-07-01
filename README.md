@@ -18,12 +18,53 @@ Here is a real-life API example. You may be familiar with the process of searchi
 
 ## How To Make A Basic API On Autocode
 
-First We Have To Make New Project, Then Make Folder Name It Functions!
-Here I Will Make An Basic API. Which Will Send An Random Number Between 1 To 10,
-Let Make New Js File, Here I Have Named It Ramdom-Number.js
+```
+/**
+ * An example typed API that generates a hello world message
+ *   Read more about typing at: https://github.com/acode/functionscript
+ * @param {string} name The name to say hello to
+ * @param {integer} count The number of times to say hello
+ * @returns {object} body
+ * @ {array} messages A list of messages
+ */
+module.exports = async (name = 'world', count = 10) => {
+  count = Math.min(Math.max(1, count), 100);
+  return {
+    messages: Array(count).fill(`Hello ${name}, welcome to Autocode ${count} times!`)
+  };
+};
+```
+
+If you've worked on other Autocode projects, you might notice that this endpoint   
+looks a bit different from standard webhook endpoints. That's because this
+endpoint defines its parameters and return types using 
+[FunctionScript](https://github.com/acode/functionscript), Autocode's specification
+for turning functions into type-safe HTTP APIs. The comment block 
+(lines between `/**` and `*/`) is where everything happens.
+Here's more detail on what each line does:
+
+- The lines before the first `@param` describe what the API does.
+- `@param {string} name The name to say hello to` declares that the endpoint will take a `string` parameter called `name`.
+- `@param {integer} count The number of times to say hello` declares that the endpoint will take a `integer` parameter called `count`.
+- `@returns {object} body` declares that the API will return an `object`.
+- `@ {array} messages A list of messages` applies to the previous line, and declares that the object the endpoint returns will contain an array property called `messages`.
+- `module.exports = async (name = 'world', count = 10) => {` sets default values of `'world'` and `10` for `name` and `count`. These will be used if the incoming request does not have values for those parameters.
+
+**Note:** The comment block must go *immediately* above the line that exports the 
+function (`module.exports`).
+
+If a request comes in that doesn't match this typing (for example, a request that
+passes in a non-integer `count` parameter like `'hello'`), Autocode will reject the request and your
+code will not run. Additionally, if your function returns a value that does not
+match the return type, your function will automatically return an error (though 
+the code will still run). 
+
+You can designate parameters as optional by using `null` as a default value.
+For more on what you can do with FunctionScript, including a full list of types,
+check out [the official docs](https://github.com/acode/functionscript).
 
 https://youtu.be/Y9HIMlPMANk
-
+<h3>Another Example</h3>
 ```
 let messagePrompts = [
 'Number 1',
@@ -41,17 +82,10 @@ let messagePrompts = [
   let message = messagePrompts[messageChoice];
   return (message)
 ```
-Save Your Project!
-Here I Have Coded An API Which Sends Random Number Between 1 To 10,
-As You Can See In Below Image When I Run The API, It Send A Random Number,
-As Going A Head Make Sure Your Endpoint Is Http:
 
 ![Image](https://abhay557.public.files.stdlib.com/_stdlib/provider/Abhay557/images/s.jpg)
+ Ship-Release It With All Enivorments!
 
-## About Autocode Standard Library
-If You Want Your API Listed IN Standard Library Of Autocode.com,
-So Ship-Release It With All Enivorments!
-
-Basic API-https://autocode.com/lib/agentsoflegacy/basic-api/
+Basic API-https://autocode.com/lib/abhay557/basic/
 
 Thread By Abhay557 
